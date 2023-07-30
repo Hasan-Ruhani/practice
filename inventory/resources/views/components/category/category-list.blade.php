@@ -57,12 +57,13 @@ async function getList() {
 
     $('.edit').on('click', function(){
         let id = $(this).data('id');
-        alert(id);
+        $("#update-modal").modal('show');
     });
 
     $('.delete').on('click', function(){
         let id = $(this).data('id');
-        alert(id);
+        $("#delete-modal").modal('show');
+        $("#deleteID").val(id);
     });
     
     tableData.DataTable({
