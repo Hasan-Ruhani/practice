@@ -55,8 +55,9 @@ async function getList() {
         tableList.append(row);
     });
 
-    $('.edit').on('click', function(){
+    $('.edit').on('click', async function(){
         let id = $(this).data('id');
+        await FillUpUpdateForm(id);
         $("#update-modal").modal('show');
     });
 
