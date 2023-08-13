@@ -77,3 +77,8 @@ Route::get('/list-product', [ProductController::class, 'ProductList'])->middlewa
 Route::get('/total-customer', [DashboardController::class, 'TotalCustomer'])->middleware(TokenVerificationMiddleware::class);
 Route::get('/total-category', [DashboardController::class, 'TotalCategory'])->middleware(TokenVerificationMiddleware::class);
 Route::get('/total-product', [DashboardController::class, 'TotalProduct'])->middleware(TokenVerificationMiddleware::class);
+
+
+// Route::get('/total-customer', [DashboardController::class, 'TotalCustomer'])->middleware(TokenVerificationMiddleware::class);
+// Route::get('/total-category', [DashboardController::class, 'TotalCategory'])->middleware(TokenVerificationMiddleware::class);
+// Route::get('/total-product', [DashboardController::class, 'TotalProduct'])->middleware(TokenVerificationMiddleware::class);
