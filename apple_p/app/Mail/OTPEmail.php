@@ -13,12 +13,10 @@ class OTPEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public $details;
+    public function __construct($details)
     {
-        //
+        $this -> details = $details;
     }
 
     /**
@@ -37,7 +35,7 @@ class OTPEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'email.OTPMail',
         );
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// User
+Route::get('/UserLogin/{UserEmail}', [UserController::class, 'UserLogin']);
+Route::get('/VerifyLogin/{UserEmail}/{OTP}', [UserController::class, 'VerifyLogin']);
+Route::get('/UserLogout', [UserController::class, 'UserLogout']);
+
+
+Route::post('/CreateProfile', [ProfileController::class, 'CreateProfile']);
