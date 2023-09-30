@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +28,21 @@ Route::get('/UserLogin/{UserEmail}', [UserController::class, 'UserLogin']);
 Route::get('/VerifyLogin/{UserEmail}/{OTP}', [UserController::class, 'VerifyLogin']);
 Route::get('/UserLogout', [UserController::class, 'UserLogout']);
 
+Route::middleware(['tokenAuth']) -> group(function() {
 
-Route::post('/CreateProfile', [ProfileController::class, 'CreateProfile']);
+    // customer profile
+    Route::post('/CreateProfile', [ProfileController::class, 'CreateProfile']);
+    Route::get('/ReadProfile', [ProfileController::class, 'ReadProfile']);
+
+    // Brand
+    Route::get('/BrandList', [BrandController::class, 'BrandList']);
+
+    // Category
+    Route::get('/CategoryList', [CategoryController::class, 'CategoryList']);
+    
+    // product
+    Route::get('/ListProductByCategory', [ProductController::class, 'ListProductByCategory']);
+});
+
+
+
