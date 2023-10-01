@@ -34,6 +34,13 @@ Route::middleware(['tokenAuth']) -> group(function() {
     Route::post('/CreateProfile', [ProfileController::class, 'CreateProfile']);
     Route::get('/ReadProfile', [ProfileController::class, 'ReadProfile']);
 
+    // product review
+    Route::post('/CreateProductReview', [ProductController::class, 'CreateProductReview']);
+
+
+});
+
+
     // Brand
     Route::get('/BrandList', [BrandController::class, 'BrandList']);
 
@@ -41,8 +48,7 @@ Route::middleware(['tokenAuth']) -> group(function() {
     Route::get('/CategoryList', [CategoryController::class, 'CategoryList']);
     
     // product
-    Route::get('/ListProductByCategory', [ProductController::class, 'ListProductByCategory']);
-});
-
-
-
+    Route::get('/ListProductByCategory/{id}', [ProductController::class, 'ListProductByCategory']);
+    Route::get('/ListProductByBrand/{id}', [ProductController::class, 'ListProductByBrand']);
+    Route::get('/ListProductByRemark/{remark}', [ProductController::class, 'ListProductByRemark']);
+    Route::get('/ProductDetailsById/{product_id}', [ProductController::class, 'ProductDetailsById']);
