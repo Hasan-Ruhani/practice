@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper\ResponseHelper;
 use App\Models\CustomerProfile;
 use App\Models\Product;
-use App\Models\ProductDetaile;
+use App\Models\ProductDetail;
 use App\Models\ProductReview;
 use App\Models\ProductSlider;
 use Illuminate\Http\JsonResponse;
@@ -33,8 +33,8 @@ class ProductController extends Controller
         return ResponseHelper::Out('success', $data, 200);
     }
 
-    public function ProductDetailsById(Request $request): JsonResponse {  // product details not work yet
-        $data = ProductDetaile::where('product_id', $request->id)->with('product', 'product.brand', 'product.category')->get();
+    public function ProductDetailsById(Request $request): JsonResponse {
+        $data = ProductDetail::where('product_id', $request->id)->with('product', 'product.brand', 'product.category')->get();
         return ResponseHelper::Out('success', $data, 200); 
     }
 
@@ -45,10 +45,13 @@ class ProductController extends Controller
         if($profile){
             $request -> merge(['customer_id' => $profile -> id]);
             $data = ProductReview::updateOrCreate(
-                ['customer_id' => $profile -> id, 'product_id' => $request -> input('product_id')]);
-                $request -> input();
+                ['customer_id' => $profile -> id, 'product_id' => $request -> input('product_id')],
+                $request -> input());
+                return ResponseHelper::Out('success', $data, 200);
         }
-        return ResponseHelper::Out('success', $data, 200);
+        else{
+            return ResponseHelper::Out('fail','Customer profile not exists',200);
+        }
     }
 }
 
