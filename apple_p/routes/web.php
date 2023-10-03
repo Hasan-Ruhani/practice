@@ -51,4 +51,4 @@ Route::middleware(['tokenAuth']) -> group(function() {
     Route::get('/ListProductByCategory/{id}', [ProductController::class, 'ListProductByCategory']);
     Route::get('/ListProductByBrand/{id}', [ProductController::class, 'ListProductByBrand']);
     Route::get('/ListProductByRemark/{remark}', [ProductController::class, 'ListProductByRemark']);
-    Route::get('/ProductDetailsById/{product_id}', [ProductController::class, 'ProductDetailsById']);
+    Route::get('/ProductDetailsById/{id}', [ProductController::class, 'ProductDetailsById']);
