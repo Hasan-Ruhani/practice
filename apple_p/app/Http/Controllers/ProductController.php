@@ -33,7 +33,7 @@ class ProductController extends Controller
         return ResponseHelper::Out('success', $data, 200);
     }
 
-    public function ProductDetailsById(Request $request): JsonResponse {           // product ID working 
+    public function ProductDetailsById(Request $request): JsonResponse {
         $data = ProductDetail::where('product_id', $request->id)->with('product', 'product.brand', 'product.category')->get();
         return ResponseHelper::Out('success', $data, 200); 
     }
