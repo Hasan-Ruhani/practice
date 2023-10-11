@@ -38,7 +38,7 @@ class ProductController extends Controller
         return ResponseHelper::Out('success', $data, 200); 
     }
 
-    public function CreateProductReview(Request $request): JsonResponse {    // create review not work yet
+    public function CreateProductReview(Request $request): JsonResponse {
         $user_id = $request -> header('id');
         $profile = CustomerProfile::where('user_id', $user_id) -> first();
 
@@ -53,6 +53,13 @@ class ProductController extends Controller
             return ResponseHelper::Out('fail','Customer profile not exists',200);
         }
     }
+
+    public function ListReviewByProduct(Request $request):JsonResponse{
+        $data=ProductReview::where('product_id',$request->product_id)
+            ->with(['profile'=>function($query){
+                $query->select('id','cus_name');
+            }])->get();
+        return ResponseHelper::Out('success',$data,200);
+    }
 }
 
-// this controller again start the work after tour my home
