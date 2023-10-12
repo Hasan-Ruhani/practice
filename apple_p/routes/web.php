@@ -37,6 +37,16 @@ Route::middleware(['tokenAuth']) -> group(function() {
     // product review
     Route::post('/CreateProductReview', [ProductController::class, 'CreateProductReview']);
     
+    // wish list
+    Route::get('/CreateWishList/{product_id}', [ProductController::class, 'CreateWishList']);
+    Route::get('/ProductWishList', [ProductController::class, 'ProductWishList']);
+    Route::get('/RemoveWishList/{product_id}', [ProductController::class, 'RemoveWishList']);
+
+    // cart list
+    Route::post('/CreateCartList', [ProductController::class, 'CreateCartList']);
+    Route::get('/CartList', [ProductController::class, 'CartList']);
+    Route::get('/DeleteCartList/{product_id}', [ProductController::class, 'DeleteCartList']);
+    
 
     
 });
