@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -46,6 +47,11 @@ Route::middleware(['tokenAuth']) -> group(function() {
     Route::post('/CreateCartList', [ProductController::class, 'CreateCartList']);
     Route::get('/CartList', [ProductController::class, 'CartList']);
     Route::get('/DeleteCartList/{product_id}', [ProductController::class, 'DeleteCartList']);
+
+    // invoice
+    Route::get("/InvoiceCreate", [InvoiceController::class, 'InvoiceCreate']);
+    Route::get("/InvoiceList", [InvoiceController::class, 'InvoiceList']);
+    Route::get("/InvoiceProductList/{invoice_id}", [InvoiceController::class, 'InvoiceProductList']);
     
 
     
@@ -64,3 +70,8 @@ Route::middleware(['tokenAuth']) -> group(function() {
     Route::get('/ProductDetailsById/{id}', [ProductController::class, 'ProductDetailsById']);
     Route::get('/ListReviewByProduct/{product_id}', [ProductController::class, 'ListReviewByProduct']);
     Route::get('/ListProductSlider', [ProductController::class, 'ListProductSlider']);
+
+    //payment
+    Route::post("/PaymentSuccess",[InvoiceController::class,'PaymentSuccess']);
+    Route::post("/PaymentCancel",[InvoiceController::class,'PaymentCancel']);
+    Route::post("/PaymentFail",[InvoiceController::class,'PaymentFail']);
