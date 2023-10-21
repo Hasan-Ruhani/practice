@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -20,12 +22,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [HomeController::class, 'HomePage']);
 
 // User
 Route::get('/UserLogin/{UserEmail}', [UserController::class, 'UserLogin']);
+
 Route::get('/VerifyLogin/{UserEmail}/{OTP}', [UserController::class, 'VerifyLogin']);
 Route::get('/UserLogout', [UserController::class, 'UserLogout']);
 
@@ -71,7 +73,10 @@ Route::middleware(['tokenAuth']) -> group(function() {
     Route::get('/ListReviewByProduct/{product_id}', [ProductController::class, 'ListReviewByProduct']);
     Route::get('/ListProductSlider', [ProductController::class, 'ListProductSlider']);
 
-    //payment
+    // payment
     Route::post("/PaymentSuccess",[InvoiceController::class,'PaymentSuccess']);
     Route::post("/PaymentCancel",[InvoiceController::class,'PaymentCancel']);
     Route::post("/PaymentFail",[InvoiceController::class,'PaymentFail']);
+
+    // policy
+    Route::get("/PolicyByType/{type}", [PolicyController::class, 'PolicyByType']);
