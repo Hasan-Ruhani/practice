@@ -23,22 +23,27 @@
 
 
 <script>
-    async function Login() {
-        let email = document.getElementById('email').value;
-        if (email.length === 0) {
-            alert("Email Required!");
-        } else {
-            $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
-            let res=await axios.get("/UserLogin/"+email);
-            if(res.status===200){
-                sessionStorage.setItem('email',email);
-                window.location.href="/verify"
-            }
-            else{
-                $(".preloader").delay(90).fadeOut(100).addClass('loaded');
-                alert("Something Went Wrong");
-            }
-        }
 
+    async function Login(){
+        
     }
+
+    // async function Login() {
+    //     let email = document.getElementById('email').value;
+    //     if (email.length === 0) {
+    //         alert("Email Required!");
+    //     } else {
+    //         $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
+    //         let res=await axios.get("/UserLogin/"+email);
+    //         if(res.status===200){
+    //             sessionStorage.setItem('email',email);
+    //             window.location.href="/verify"
+    //         }
+    //         else{
+    //             $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+    //             alert("Something Went Wrong");
+    //         }
+    //     }
+
+    // }
 </script>
