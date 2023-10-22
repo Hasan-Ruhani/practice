@@ -22,8 +22,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+// page
 Route::get('/', [HomeController::class, 'HomePage']);
+Route::get('/by-category', [CategoryController::class, 'ByCategory']);
+Route::get('/details', [ProductController::class, 'Details']);
+Route::get('/by-brand', [BrandController::class, 'ByBrand']);
 
 // User
 Route::get('/UserLogin/{UserEmail}', [UserController::class, 'UserLogin']);
