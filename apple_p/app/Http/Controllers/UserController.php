@@ -10,9 +10,30 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+
+    public function LoginPage() {
+        return view("pages.login-page");
+    }
+
+    public function VerifyPage() {
+        return view("pages.verify-page");
+    }
+
+    function UserLogout(){
+       // sessionStorage.setItem("last_location",window.location.href);
+       // return redirect('/')->cookie('token','',-1);
+       // session(['last_location' => url()->previous()]);
+        // session(['last_location' => 'ss']);
+        // Session::put('last_location', url()->previous());
+       //$lastLocation = session('last_location');
+       //dd($lastLocation);
+       return redirect('/')->cookie('token','',-1);
+    }
+
     public function UserLogin(Request $request): JsonResponse{
         try{
             $UserEmail = $request -> UserEmail;                              // input from base url in route
@@ -42,8 +63,5 @@ class UserController extends Controller
             return ResponseHelper::Out('fail', null, 401);
         }
     }
-    
-    function UserLogout(){
-        return redirect('/userLoinPage') -> cookie('token'. '', -1);
-    }
+
 }
