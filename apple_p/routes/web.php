@@ -27,6 +27,9 @@ Route::get('/', [HomeController::class, 'HomePage']);
 Route::get('/by-category', [CategoryController::class, 'ByCategory']);
 Route::get('/details', [ProductController::class, 'Details']);
 Route::get('/by-brand', [BrandController::class, 'ByBrand']);
+Route::get('/login', [UserController::class, 'LoginPage']);
+Route::get('/verify', [UserController::class, 'VerifyPage']);
+Route::get('/logout', [UserController::class, 'UserLogout']);
 
 // User
 Route::get('/UserLogin/{UserEmail}', [UserController::class, 'UserLogin']);
