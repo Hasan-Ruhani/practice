@@ -75,9 +75,9 @@
         }
     });
 
-    $('.minus').on('click', function(){
-        if($(this).prev().val()){
-            $(this).prev().val(+$(this).prev().val() + 1);
+    $('.minus').on('click', function() {
+        if ($(this).next().val() > 1) {
+            if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
         }
     });
 
@@ -88,7 +88,7 @@
         let res = await axios.get("/ProductDetailsById/" + id);
         let Details = res.data['data'];
 
-        document.getElementById('product_img').src=Details[0]['img1'];
+        document.getElementById('product_img1').src=Details[0]['img1'];
         document.getElementById('img1').src=Details[0]['img1'];
         document.getElementById('img2').src=Details[0]['img2'];
         document.getElementById('img3').src=Details[0]['img3'];
@@ -103,81 +103,55 @@
         let color = Details[0]['color'].split(',');
 
         let SizeOption = `<option value=''>Choose Size</option>`;
-        $('#p_size').append(SizeOption);
+        $("#p_size").append(SizeOption);
         size.forEach((item) => {
             let option = `<option value='${item}'>${item}</option>`;
             $("#p_size").append(option);
-        })
+        });
 
         let ColorOption = `<option value=''>Choose Color</option>`;
         $("#p_color").append(ColorOption);
         color.forEach((item) => {
             let option = `<option value='${item}'>${item}</option>`;
             $("#p_color").append(option);
+        });
+
+
+        $('#img1').on('click', function(){
+            $('#product_img1').attr('src', Details[0]['img1']);
+        });
+
+        $('#img2').on('click', function(){
+            $('#product_img1').attr('src', Details[0]['img2']);
+        });
+
+        $('#img3').on('click', function(){
+            $('#product_img1').attr('src', Details[0]['img3']);
         })
+
+        $('#img4').on('click', function() {
+            $('#product_img1').attr('src', Details[0]['img4']);
+        });
     }
 
 
-    // $('.plus').on('click', function() {
-    //     if ($(this).prev().val()) {
-    //         $(this).prev().val(+$(this).prev().val() + 1);
-    //     }
-    // });
-    // $('.minus').on('click', function() {
-    //     if ($(this).next().val() > 1) {
-    //         if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
-    //     }
-    // });
+    // async function productReview(){
+    //     let res = await axios.get("/ListReviewByProduct/" + id);
+    //     let Details = res.data['data'];
 
-    // let searchParams = new URLSearchParams(window.location.search);
-    // let id = searchParams.get('id');
+    //     $("#reviewList").empty();
 
-
-    // async function productDetails() {
-    //     let res = await axios.get("/ProductDetailsById/"+id);
-    //     let Details=await res.data['data'];
-
-    //     document.getElementById('product_img1').src=Details[0]['img1'];
-    //     document.getElementById('img1').src=Details[0]['img1'];
-    //     document.getElementById('img2').src=Details[0]['img2'];
-    //     document.getElementById('img3').src=Details[0]['img3'];
-    //     document.getElementById('img4').src=Details[0]['img4'];
-
-    //     document.getElementById('p_title').innerText=Details[0]['product']['title'];
-    //     document.getElementById('p_price').innerText=`$ ${Details[0]['product']['price']}`;
-    //     document.getElementById('p_des').innerText=Details[0]['product']['short_des'];
-    //     document.getElementById('p_details').innerHTML=Details[0]['des'];
-
-    //     // Product Size & Color
-    //     let size= Details[0]['size'].split(',');
-    //     let color=Details[0]['color'].split(',');
-
-    //     let SizeOption=`<option value=''>Choose Size</option>`;
-    //     $("#p_size").append(SizeOption);
-    //     size.forEach((item)=>{
-    //         let option=`<option value='${item}'>${item}</option>`;
-    //         $("#p_size").append(option);
-    //     })
-
-
-    //     let ColorOption=`<option value=''>Choose Color</option>`;
-    //     $("#p_color").append(ColorOption);
-    //     color.forEach((item)=>{
-    //         let option=`<option value='${item}'>${item}</option>`;
-    //         $("#p_color").append(option);
-    //     })
-
-    //     $('#img1').on('click', function() {
-    //         $('#product_img1').attr('src', Details[0]['img1']);
-    //     });
-    //     $('#img2').on('click', function() {
-    //         $('#product_img1').attr('src', Details[0]['img2']);
-    //     });
-    //     $('#img3').on('click', function() {
-    //         $('#product_img1').attr('src', Details[0]['img3']);
-    //     });
-    //     $('#img4').on('click', function() {
-    //         $('#product_img1').attr('src', Details[0]['img4']);
+    //     Details.forEach((item, i) => {
+    //         let each= `<li class="list-group-item">
+    //             <h6>${item['profile']['cus_name']}</h6>
+    //             <p class="m-0 p-0">${item['description']}</p>
+    //             <div class="rating_wrap">
+    //                 <div class="rating">
+    //                     <div class="product_rate" style="width:${parseFloat(item['rating'])}%"></div>
+    //                 </div>
+    //             </div>
+    //         </li>`;
+    //         $("#reviewList").append(each);
     //     });
     // }
 
