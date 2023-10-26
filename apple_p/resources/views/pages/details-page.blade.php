@@ -9,7 +9,7 @@
         (async () => {
             await productDetails();
             await productReview();
-            $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+            // $(".preloader").delay(90).fadeOut(100).addClass('loaded');
         })()
     </script>
 @endsection
