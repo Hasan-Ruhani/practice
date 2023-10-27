@@ -135,122 +135,102 @@
     }
 
 
-    // async function productReview(){
-    //     let res = await axios.get("/ListReviewByProduct/" + id);
-    //     let Details = res.data['data'];
+    async function productReview(){
+        let res = await axios.get("/ListReviewByProduct/" + id);
+        let Details = res.data['data'];
 
-    //     $("#reviewList").empty();
+        $("#reviewList").empty();
 
-    //     Details.forEach((item, i) => {
-    //         let each= `<li class="list-group-item">
-    //             <h6>${item['profile']['cus_name']}</h6>
-    //             <p class="m-0 p-0">${item['description']}</p>
-    //             <div class="rating_wrap">
-    //                 <div class="rating">
-    //                     <div class="product_rate" style="width:${parseFloat(item['rating'])}%"></div>
-    //                 </div>
-    //             </div>
-    //         </li>`;
-    //         $("#reviewList").append(each);
-    //     });
-    // }
+        Details.forEach((item, i) => {
+            let each= `<li class="list-group-item">
+                <h6>${item['profile']['cus_name']}</h6>
+                <p class="m-0 p-0">${item['description']}</p>
+                <div class="rating_wrap">
+                    <div class="rating">
+                        <div class="product_rate" style="width:${parseFloat(item['rating'])}%"></div>
+                    </div>
+                </div>
+            </li>`;
+            $("#reviewList").append(each);
+        });
+    }
 
+    async function AddToCart() {
+        try {
+            let p_size=document.getElementById('p_size').value;
+            let p_color=document.getElementById('p_color').value;
+            let p_qty=document.getElementById('p_qty').value;
 
-    // // productReview();
-    // async function productReview(){
-    //     let res = await axios.get("/ListReviewByProduct/"+id);
-    //     let Details=await res.data['data'];
+            if(p_size.length===0){
+                alert("Product Size Required !");
+            }
+            else if(p_color.length===0){
+                alert("Product Color Required !");
+            }
+            else if(p_qty===0){
+                alert("Product Qty Required !");
+            }
+            else {
+                $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
+                let res = await axios.post("/CreateCartList",{
+                    "product_id":id,
+                    "color":p_color,
+                    "size":p_size,
+                    "qty":p_qty
+                });
+                $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+                if(res.status===200){
+                    alert("Request Successful")
+                }
+            }
 
-    //     $("#reviewList").empty();
-
-    //     Details.forEach((item,i)=>{
-    //         let each= `<li class="list-group-item">
-    //             <h6>${item['profile']['cus_name']}</h6>
-    //             <p class="m-0 p-0">${item['description']}</p>
-    //             <div class="rating_wrap">
-    //                 <div class="rating">
-    //                     <div class="product_rate" style="width:${parseFloat(item['rating'])}%"></div>
-    //                 </div>
-    //             </div>
-    //         </li>`;
-    //        $("#reviewList").append(each);
-    //     })
-    // }
-
-    // async function AddToCart() {
-    //     try {
-    //         let p_size=document.getElementById('p_size').value;
-    //         let p_color=document.getElementById('p_color').value;
-    //         let p_qty=document.getElementById('p_qty').value;
-
-    //         if(p_size.length===0){
-    //             alert("Product Size Required !");
-    //         }
-    //         else if(p_color.length===0){
-    //             alert("Product Color Required !");
-    //         }
-    //         else if(p_qty===0){
-    //             alert("Product Qty Required !");
-    //         }
-    //         else {
-    //             $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
-    //             let res = await axios.post("/CreateCartList",{
-    //                 "product_id":id,
-    //                 "color":p_color,
-    //                 "size":p_size,
-    //                 "qty":p_qty
-    //             });
-    //             $(".preloader").delay(90).fadeOut(100).addClass('loaded');
-    //             if(res.status===200){
-    //                 alert("Request Successful")
-    //             }
-    //         }
-
-    //     } catch (e) {
-    //         if (e.response.status === 401) {
-    //             sessionStorage.setItem("last_location",window.location.href)
-    //             window.location.href = "/login"
-    //         }
-    //     }
-    // }
+        } catch (e) {
+            if (e.response.status === 500) {
+                sessionStorage.setItem("last_location",window.location.href)
+                window.location.href = "/login"
+            }
+        }
+    }
 
 
-    // async function AddToWishList() {
-    //     try{
-    //         $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
-    //         let res = await axios.get("/CreateWishList/"+id);
-    //         $(".preloader").delay(90).fadeOut(100).addClass('loaded');
-    //         if(res.status===200){
-    //             alert("Request Successful")
-    //         }
-    //     }catch (e) {
-    //         if(e.response.status===401){
-    //             sessionStorage.setItem("last_location",window.location.href)
-    //             window.location.href="/login"
-    //         }
-    //     }
-    // }
+    async function AddToWishList() {
+        try{
+            $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
+            let res = await axios.get("/CreateWishList/" + id);
+            $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+
+            if(res.status===200){
+                alert("Request Successful")
+            }
+        }
+        catch (e) {
+            if(e.response.status===500){
+                sessionStorage.setItem("last_location",window.location.href)
+                window.location.href="/login"
+            }
+        }
+    }
 
 
-    // async function AddReview(){
-    //     let reviewText=document.getElementById('reviewTextID').value;
-    //     let reviewScore=document.getElementById('reviewScore').value;
-    //     if(reviewScore.length===0){
-    //         alert("Score Required !")
-    //     }
-    //     else if(reviewText.length===0){
-    //         alert("Review Required !")
-    //     }
-    //     else{
-    //         $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
-    //         let postBody={description:reviewText, rating:reviewScore, product_id:id}
-    //         let res=await axios.post("/CreateProductReview",postBody);
-    //         $(".preloader").delay(90).fadeOut(100).addClass('loaded');
-    //         await  productReview();
-    //     }
+    async function AddReview(){
+        let reviewText=document.getElementById('reviewTextID').value;
+        let reviewScore=document.getElementById('reviewScore').value;
+        if(reviewScore.length===0){
+            alert("Score Required !")
+        }
+        else if(reviewText.length===0){
+            alert("Review Required !")
+        }
+        else{
+            $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
+            let postBody={description:reviewText, rating:reviewScore, product_id:id}
+            let res=await axios.post("/CreateProductReview",postBody);
+            $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+            await  productReview();
+        }
 
 
-    // }
+    }
 
 
 
