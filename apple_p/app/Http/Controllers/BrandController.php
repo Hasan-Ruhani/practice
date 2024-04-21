@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-
     public function ByBrand() {
         return view("pages.product-by-brand");
     }

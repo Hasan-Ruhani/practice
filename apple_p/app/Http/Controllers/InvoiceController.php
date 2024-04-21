@@ -37,7 +37,6 @@ class InvoiceController extends Controller
             $vat = ($total * 3) / 100;
             $payable = $total + $vat;
 
-
             $invoice = Invoice::create([
                 'total'=>$total,
                 'vat'=>$vat,
